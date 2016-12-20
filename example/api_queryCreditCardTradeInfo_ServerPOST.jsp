@@ -24,14 +24,19 @@
 		oPayment.MerchantID = (String) session.getAttribute("MerchantID");		
 		
 		/* 基本參數 */
-		oPayment.Query.MerchantTradeNo = "1422348600644";
+		oPayment.Query.MerchantTradeNo = "TEST83467";
 		
 		PeriodCreditCardTradeInfo htFeedback = new PeriodCreditCardTradeInfo();		
 		enErrors.addAll(oPayment.QueryCreditCardTradeInfo(htFeedback));
 		
-		if (enErrors.size() == 0) {
+		if (htFeedback.toString() == "{}") {
 			out.println("0|" + "無回傳值(遠端服務無法回傳到測試網站, 請檢查測試的網路環境)" + "<br/>");
-		} else {		
+		} else {
+			/* 查詢後的回傳的基本參數 */
+			//out.println("查詢後所有的回傳參數" + "<br/>");
+			//out.println(htFeedback + "<br/>");
+			//out.println("<br/>");
+			
 			/* 查詢後的回傳的基本參數 */		
 			String szMerchantID = htFeedback.MerchantID;
 			String szMerchantTradeNo = htFeedback.MerchantTradeNo;

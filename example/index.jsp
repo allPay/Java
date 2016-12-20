@@ -14,18 +14,12 @@
 </head>
 <body>
 <%
-	//* 預設資料 BETA
-	session.setAttribute("AllPayURL", ENVIRONMENT.BETA.toString());
-	session.setAttribute("HashKey", "Zf1AjVRlwE4XjlF9");
-	session.setAttribute("HashIV", "Ps8hPWGtUW0PE3Gk");
-	session.setAttribute("MerchantID", "1000139");
-	//*/
-	/* STAGE
+	// 預設資料 STAGE
 	session.setAttribute("AllPayURL", ENVIRONMENT.STAGE.toString());
 	session.setAttribute("HashKey", "5294y06JbISpM5x9");
 	session.setAttribute("HashIV", "v77hoKGq4kWxNNIS");
 	session.setAttribute("MerchantID", "2000132");
-	//*/
+	//
 	session.setAttribute("ServerIP", "http://127.0.0.1:8080/aioAllpay");
 %>
 <form action="<%=session.getAttribute("ServerIP")%>/api_checkOut_ATM.jsp" method="post">
