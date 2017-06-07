@@ -55,7 +55,7 @@ public class AllPayFunction {
 		try{
 			for(String name: fieldNames){
 				if(name != "CheckMacValue"){
-					Method method = cls.getMethod("get"+name, null);
+					Method method = cls.getMethod("get"+name.substring(0, 1).toUpperCase()+name.substring(1), null);
 					data = data + '&' + name + '=' + method.invoke(obj).toString();
 				}
 			}
@@ -103,7 +103,7 @@ public class AllPayFunction {
 		String result = "";
 		for(int i = 0; i < fieldNames.size(); i++){
 			try {
-				method = cls.getMethod("get"+fieldNames.get(i), null);
+				method = cls.getMethod("get"+fieldNames.get(i).substring(0, 1).toUpperCase()+fieldNames.get(i).substring(1), null);
 				fieldNames.set(i, fieldNames.get(i) + '=' + invokeMethod(method, obj));
 			} catch (Exception e) {
 				throw new AllPayException(ErrorMessage.OBJ_MISSING_FIELD);
@@ -125,7 +125,7 @@ public class AllPayFunction {
 		for(int i = 0; i < fieldNames.size(); i++){
 			Method method;
 			try {
-				method = cls.getMethod("get"+fieldNames.get(i), null);
+				method = cls.getMethod("get"+fieldNames.get(i).substring(0, 1).toUpperCase()+fieldNames.get(i).substring(1), null);
 				resultDict.put(fieldNames.get(i), invokeMethod(method, obj));
 			} catch (Exception e) {
 				throw new AllPayException(ErrorMessage.OBJ_MISSING_FIELD);
@@ -176,7 +176,7 @@ public class AllPayFunction {
 			in.close();
 			return response.toString();
 		} catch(Exception e){
-			throw new AllPayException(ErrorMessage.POST_ERROR);
+			throw new AllPayException(e.getMessage());
 		}
 	}
 	
