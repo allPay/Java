@@ -293,7 +293,7 @@
   </AioCheckOut>
   <QueryTradeInfo>
     <ServiceAddress>
-        <url type="Production">https://payment.allpay.com.tw/Cashier/QueryTradeInfo/V4</url>
+        <url type="Production">https://payment.allPay.com.tw/Cashier/QueryTradeInfo/V4</url>
         <url type="Test">https://payment-stage.allPay.com.tw/Cashier/QueryTradeInfo/V4</url>
     </ServiceAddress>
     <Config>

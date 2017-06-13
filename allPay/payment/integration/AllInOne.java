@@ -24,6 +24,7 @@ import allPay.payment.integration.domain.AioCheckOutDevide;
 import allPay.payment.integration.domain.AioCheckOutOneTime;
 import allPay.payment.integration.domain.AioCheckOutPeriod;
 import allPay.payment.integration.domain.AioCheckOutTenpay;
+import allPay.payment.integration.domain.AioCheckOutTopUpUsed;
 import allPay.payment.integration.domain.AioCheckOutWebATM;
 import allPay.payment.integration.domain.CVSRequestObj;
 import allPay.payment.integration.domain.CaptureObj;
@@ -206,6 +207,8 @@ public class AllInOne extends AllInOneBase{
 			log.info("aioChargeback generate CheckMacValue: " + CheckMacValue);
 			String httpValue = AllPayFunction.genHttpValue(aioChargebackObj, CheckMacValue);
 			log.info("aioChargeback post String: " + httpValue);
+			System.out.println(httpValue);
+			System.out.println(aioChargebackUrl);
 			result = AllPayFunction.httpPost(aioChargebackUrl, httpValue, "UTF-8");
 		} catch (AllPayException e2) {
 			e2.ShowExceptionMessage();
@@ -348,6 +351,8 @@ public class AllInOne extends AllInOneBase{
 			log.info("queryTradeInfo generate CheckMacValue: " + CheckMacValue);
 			String httpValue = AllPayFunction.genHttpValue(queryTradeInfoObj, CheckMacValue);
 			log.info("queryTradeInfo post String: " + httpValue);
+			System.out.println(httpValue);
+			System.out.println(queryTradeInfoUrl);
 			result = AllPayFunction.httpPost(queryTradeInfoUrl, httpValue, "UTF-8");
 		} catch (AllPayException e2) {
 			e2.ShowExceptionMessage();
@@ -411,7 +416,17 @@ public class AllInOne extends AllInOneBase{
 				((AioCheckOutALL) obj).setIgnorePayment(ignoreParam);
 			}
 			log.info("aioCheckOutALL params: " + ((AioCheckOutALL) obj).toString());
-		} else if(obj instanceof AioCheckOutATM){
+		} else if(obj instanceof AioCheckOutTopUpUsed){
+			((AioCheckOutTopUpUsed) obj).setPlatformID(PlatformID);
+			if(!PlatformID.isEmpty() && ((AioCheckOutTopUpUsed) obj).getMerchantID().isEmpty()){
+				((AioCheckOutTopUpUsed) obj).setMerchantID(MerchantID);
+			} else if(!PlatformID.isEmpty() && !((AioCheckOutTopUpUsed) obj).getMerchantID().isEmpty()){
+			} else {
+				((AioCheckOutTopUpUsed) obj).setMerchantID(MerchantID);
+			}
+			((AioCheckOutTopUpUsed) obj).setInvoiceMark(invoice == null? "N" : "Y");
+			log.info("aioCheckOutTopUpUsed params: " + ((AioCheckOutTopUpUsed) obj).toString());
+		}else if(obj instanceof AioCheckOutATM){
 			((AioCheckOutATM) obj).setPlatformID(PlatformID);
 			if(!PlatformID.isEmpty() && ((AioCheckOutATM) obj).getMerchantID().isEmpty()){
 				((AioCheckOutATM) obj).setMerchantID(MerchantID);
