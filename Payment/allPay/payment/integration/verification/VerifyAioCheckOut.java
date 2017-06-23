@@ -136,7 +136,7 @@ public class VerifyAioCheckOut extends PaymentVerifyBase {
 		else if(obj.getInvoiceItemTaxType().isEmpty())
 			throw new AllPayException("InvoiceItemTaxType cannot be empty.");
 		// 商品名稱含有管線 => 認為是多樣商品 *InvoiceItemName， *InvoiceItemCount ，*InvoiceItemWord， *InvoiceItemPrice InvoiceItemTaxType逐一用管線分割，計算數量後與第一個比對
-		if(obj.getInvoiceItemName().contains("\\|")){
+		if(obj.getInvoiceItemName().contains("|")){
 			int itemCount = obj.getInvoiceItemName().split("|").length;
 			int paramCount = 0;
 			Pattern r = Pattern.compile("(\\|\\||^\\||\\|$)");
